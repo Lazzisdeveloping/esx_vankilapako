@@ -5,6 +5,10 @@
 
 • Credits https://github.com/ESX-Org/esx_holdup
 
+• !!! TULOSSA !!!
+
+• Tarvii itemin aloitukseen
+
 !!! REQUIREMENTS !!!
 
 • https://github.com/qalle-git/esx-qalle-jail
