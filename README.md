@@ -3,7 +3,7 @@
 
 • tiedosto on supportattu esx-qalle-jail:in kanssa
 
-• Credits https://github.com/ESX-Org/esx_holdup/archive/master.zip
+• Credits https://github.com/ESX-Org/esx_holdup
 
 !!! REQUIREMENTS !!!
 
