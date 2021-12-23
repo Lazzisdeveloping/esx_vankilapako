@@ -18,6 +18,7 @@ RegisterNetEvent("esx-qalle-jail:openUnJailMenu")
 AddEventHandler("esx-qalle-jail:openUnJailMenu", function()
 	OpenUnJailMenu()
 end)
+```
 
 ```
 function OpenUnJailMenu()
