@@ -6,7 +6,7 @@ Vankilapako scripti FiveM roolipeliin
 Drag & Drop
 
 !!! REQUIREMENTS !!!
-https://github.com/qalle-git/esx-qalle-jail
+• https://github.com/qalle-git/esx-qalle-jail
 
 Lisää pari snipettiä esx-qalle-jailii
 
@@ -66,4 +66,4 @@ function OpenUnJailMenu()
 	end, function(data, menu)
 		menu.close()
 	end)	
-end```
+end
