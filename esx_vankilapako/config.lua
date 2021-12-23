@@ -7,7 +7,7 @@ Config.Marker = {
 	DrawDistance = 15.0, Type = 1    
 }
 
-Config.boliisia = 1 --Monta poliisia tarvitaan aloitukseen
+Config.boliisia = 5 --Monta poliisia tarvitaan aloitukseen
 Config.eijaksaoottaa    = 100 -- kauan joutuu odottamaan uutta hakkerointi yritystä [sekunteina]
 
 Config.MaxDistance    = 1  
@@ -15,7 +15,7 @@ Config.MaxDistance    = 1
 Stores = {
 	["Vankila"] = {
 		position = { x = 1831.36, y = 2603.34, z = 45.89 },
-		secondsRemaining = 3, --hakkeroinnin pituus [sekunteina]
+		secondsRemaining = 200, --hakkeroinnin pituus [sekunteina]
 		lastRobbed = 0
 	},
 
