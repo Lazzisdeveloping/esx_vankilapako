@@ -9,6 +9,8 @@
 
 • Tarvii itemin aloitukseen
 
+• Vain yhden henkilön vapauttaminen kerrallaan
+
 !!! REQUIREMENTS !!!
 
 • https://github.com/qalle-git/esx-qalle-jail
