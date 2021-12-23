@@ -2,6 +2,7 @@
 • Vankilapako scripti FiveM roolipeliin tiedosto on supportattu esx-qalle-jail:in kanssa
 
 • Eka Scripti jonka julkaisen
+
 • Credits https://github.com/AshdeuzoFR/esx_holdup
 
 !!! REQUIREMENTS !!!
