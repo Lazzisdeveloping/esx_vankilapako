@@ -1,14 +1,23 @@
 # esx_vankilapako
-Vankilapako scripti FiveM roolipeliin
+Vankilapako scripti FiveM roolipeliin tiedosto on supportattu esx-qalle-jail:in kanssa
+
+!!! REQUIREMENTS !!!
+
+• https://github.com/qalle-git/esx-qalle-jail
 
 !!! ASENTAMINEN !!!
 
-Drag & Drop
-
-!!! REQUIREMENTS !!!
-• https://github.com/qalle-git/esx-qalle-jail
+Drag & Drop Files
 
 Lisää pari snipettiä esx-qalle-jailii
+
+esx-qalle-jail/client/client.lua
+
+```
+RegisterNetEvent("esx-qalle-jail:openUnJailMenu")
+AddEventHandler("esx-qalle-jail:openUnJailMenu", function()
+	OpenUnJailMenu()
+end)
 
 ```
 function OpenUnJailMenu()
