@@ -1,5 +1,5 @@
 local holdingUp = false
-local store = ""
+local jail = ""
 local blipRobbery = nil
 ESX = nil
 
@@ -36,8 +36,8 @@ function drawTxt(x,y, width, height, scale, text, r,g,b,a, outline)
 end
 
 RegisterNetEvent('esx_vankilapako:currentlyRobbing')
-AddEventHandler('esx_vankilapako:currentlyRobbing', function(currentStore)
-	holdingUp, store = true, currentStore
+AddEventHandler('esx_vankilapako:currentlyRobbing', function(currentjail)
+	holdingUp, jail = true, currentjail
 end)
 
 RegisterNetEvent('esx_vankilapako:killBlip')
@@ -46,8 +46,8 @@ AddEventHandler('esx_vankilapako:killBlip', function()
 end)
 
 RegisterNetEvent('esx_vankilapako:setBlip')
-AddEventHandler('esx_vankilapako:setBlip', function(position)
-	blipRobbery = AddBlipForCoord(position.x, position.y, position.z)
+AddEventHandler('esx_vankilapako:setBlip', function(sijainti)
+	blipRobbery = AddBlipForCoord(sijainti.x, sijainti.y, sijainti.z)
 
 	ESX.ShowAdvancedNotification('Hälytys', '~r~Vankila', "", "CHAR_CALL911", 1)
 	PlaySound(-1, "Bomb_Disarmed", "GTAO_Speed_Convoy_Soundset", 0, 0, 1)
@@ -60,19 +60,26 @@ end)
 
 RegisterNetEvent('esx_vankilapako:tooFar')
 AddEventHandler('esx_vankilapako:tooFar', function()
-	holdingUp, store = false, ''
+	holdingUp, jail = false, ''
 	ESX.ShowNotification(_U('robbery_cancelled'))
 end)
 
 RegisterNetEvent('esx_vankilapako:robberyComplete')
 AddEventHandler('esx_vankilapako:robberyComplete', function(award)
+	ClearPedTasks(GetPlayerPed(-1))
 	TriggerEvent("esx-qalle-jail:openUnJailMenu")
-	holdingUp, store = false, ''
+	holdingUp, jail = false, ''
+end)
+
+RegisterNetEvent('esx_vankilapako:anim')
+AddEventHandler('esx_vankilapako:anim', function()
+	local ped = PlayerPedId()
+	TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_BIN", 0, true)
 end)
 
 RegisterNetEvent('esx_vankilapako:startTimer')
 AddEventHandler('esx_vankilapako:startTimer', function()
-	local timer = Stores[store].secondsRemaining
+	local timer = jails[jail].aika
 
 	Citizen.CreateThread(function()
 		while timer > 0 and holdingUp do
@@ -97,23 +104,23 @@ Citizen.CreateThread(function()
 		Citizen.Wait(1)
 		local playerPos = GetEntityCoords(PlayerPedId(), true)
 
-		for k,v in pairs(Stores) do
-			local storePos = v.position
-			local distance = Vdist(playerPos.x, playerPos.y, playerPos.z, storePos.x, storePos.y, storePos.z)
+		for k,v in pairs(jails) do
+			local jailPos = v.sijainti
+			local distance = Vdist(playerPos.x, playerPos.y, playerPos.z, jailPos.x, jailPos.y, jailPos.z)
 
 			if distance < Config.Marker.DrawDistance then
 				if not holdingUp then
-					DrawMarker(Config.Marker.Type, storePos.x, storePos.y, storePos.z - 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Marker.x, Config.Marker.y, Config.Marker.z, Config.Marker.r, Config.Marker.g, Config.Marker.b, Config.Marker.a, false, false, 2, false, false, false, false)
+					DrawMarker(Config.Marker.Type, jailPos.x, jailPos.y, jailPos.z - 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Marker.x, Config.Marker.y, Config.Marker.z, Config.Marker.r, Config.Marker.g, Config.Marker.b, Config.Marker.a, false, false, 2, false, false, false, false)
 
 					if distance < 0.5 then
-						ESX.ShowHelpNotification(_U('press_to_rob', v.nameOfStore))
+						ESX.ShowHelpNotification(_U('press_to_rob', v.nameOfjail))
 
 						if IsControlJustReleased(0, Keys['E']) then
 							if IsPedArmed(PlayerPedId(), 4) then
 								TriggerServerEvent('esx_vankilapako:robberyStarted', k)
-								TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_BIN", 0, true)
 
 							else
+								ClearPedTasks(ped)
 								ESX.ShowNotification(_U('no_threat'))
 							end
 						end
@@ -123,9 +130,9 @@ Citizen.CreateThread(function()
 		end
 
 		if holdingUp then
-			local storePos = Stores[store].position
-			if Vdist(playerPos.x, playerPos.y, playerPos.z, storePos.x, storePos.y, storePos.z) > Config.MaxDistance then
-				TriggerServerEvent('esx_vankilapako:tooFar', store)
+			local jailPos = jails[jail].sijainti
+			if Vdist(playerPos.x, playerPos.y, playerPos.z, jailPos.x, jailPos.y, jailPos.z) > Config.MaxDistance then
+				TriggerServerEvent('esx_vankilapako:tooFar', jail)
 			end
 		end
 	end
