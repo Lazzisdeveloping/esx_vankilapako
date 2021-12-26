@@ -7,11 +7,15 @@
 
 • !!! TULOSSA !!!
 
-• Tarvii itemin aloitukseen
-
 • Vain yhden henkilön vapauttaminen kerrallaan
 
 • Showcase video
+
+!!! PÄIVITYKSET !!!
+
+• Tarvii itemin aloitukseen 
+
+• Animaatio hakkerointiin
 
 !!! REQUIREMENTS !!!
 
